@@ -10,4 +10,11 @@ class BasePage:
 
     def open(self):
         self.browser.get(self.url)
+
+    def is_element_present(self, by: str, value: str):
+        try:
+            self.browser.find_element(by, value)
+        except NoSuchElementException:
+            return False
+        return True
         
