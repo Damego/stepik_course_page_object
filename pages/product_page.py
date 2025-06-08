@@ -26,4 +26,8 @@ class ProductPage(BasePage):
         
         assert product_price == basket_price
         
-        
+    def success_message_is_not_present(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+    
+    def success_message_disappeared(self):
+        assert self.element_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message did not disappear"

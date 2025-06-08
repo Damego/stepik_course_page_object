@@ -26,4 +26,31 @@ def test_guest_can_add_product_to_basket(browser: WebDriver, link: str):
     page.open()
     page.add_product_to_basket()
     page.added_product_equals_to_product()
-    page.added_product_equals_to_product()
+    page.added_product_equals_to_product()    page.added_product_equals_to_product()
+
+
+@pytest.mark.xfail(reason="Known bug: success message appears after adding product to basket")
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser: WebDriver):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_basket()
+    page.success_message_is_not_present()
+
+
+def test_guest_cant_see_success_message(browser: WebDriver):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.success_message_is_not_present()
+
+
+@pytest.mark.xfail(reason="Known bug: success message is visible even without adding product")
+def test_message_disappeared_after_adding_product_to_basket(browser: WebDriver):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_basket()
+    page.solve_quiz_and_get_code()
+    page.success_message_disappeared()
+    
